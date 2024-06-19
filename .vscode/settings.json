@@ -1,4 +1,6 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Prettierをフォーマッターとして設定
+  "editor.formatOnSave": true, // ファイル保存時にフォーマットする
   "gitmoji.addCustomEmoji": [
     {
       "emoji": "🐛",
