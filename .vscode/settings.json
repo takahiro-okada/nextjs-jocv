@@ -1,6 +1,9 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode", // Prettierをフォーマッターとして設定
-  "editor.formatOnSave": true, // ファイル保存時にフォーマットする
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit", // ファイル保存時にESLintの自動修正を実行する
+    "source.addMissingImports": "explicit" // 未importのモジュールを自動で探してimport文を追加する
+  },
   "gitmoji.addCustomEmoji": [
     {
       "emoji": "🐛",
