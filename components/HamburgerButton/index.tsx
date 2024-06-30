@@ -29,7 +29,7 @@ export default function HamburgerButton() {
             <Link href="#">ホーム</Link>
           </li>
           <li>
-            <Link href="/cohort">隊次から調べる</Link>
+            <Link href="/cohorts">隊次から調べる</Link>
           </li>
           <li>
             <Link href="/dispatchedcountry">任地から調べる</Link>
