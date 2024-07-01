@@ -8,7 +8,7 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # package.jsonをコピー
-COPY ./package.json ./
+COPY package.json pnpm-lock.yaml ./
 
 # 依存関係をインストール
 RUN pnpm install
