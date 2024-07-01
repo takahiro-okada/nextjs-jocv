@@ -35,7 +35,7 @@ export default function HamburgerButton() {
             <Link href="/dispatchedcountry">任地から調べる</Link>
           </li>
           <li>
-            <Link href="/currentcountry">現住所から調べる</Link>
+            <Link href="/currentaddress">現住所から調べる</Link>
           </li>
         </ul>
       </nav>
