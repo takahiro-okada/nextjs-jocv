@@ -26,7 +26,7 @@ export default function HamburgerButton() {
       >
         <ul className="mt-6">
           <li>
-            <Link href="#">ホーム</Link>
+            <Link href="/">ホーム</Link>
           </li>
           <li>
             <Link href="/cohorts">隊次から調べる</Link>
