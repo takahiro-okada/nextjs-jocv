@@ -1,8 +1,11 @@
+'use client';
 import HamburgerButton from '@/components/HamburgerButton';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 export default function Header() {
+  const { data: session, status } = useSession();
   return (
     <header>
       <div className="flex justify-between px-4 py-4">
@@ -12,9 +15,15 @@ export default function Header() {
         </Link>
 
         <div className="flex">
-          <Link href="/profile/1">
-            <Image src="/images/icon_oka.jpg" alt="logo" width={45} height={45} />
-          </Link>
+          {status === 'authenticated' ? (
+            <Link href="/1">
+              <Image src={session.user?.image ?? ``} alt="logo" width={45} height={45} />
+            </Link>
+          ) : (
+            <Link href="/login" className='className="px-4 py-2 bg-main-500 text-white rounded-md"'>
+              ログイン
+            </Link>
+          )}
           <div className="ml-4 flex items-center">
             <HamburgerButton />
           </div>
