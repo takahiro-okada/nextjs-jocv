@@ -4,13 +4,11 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Button from '@/components/Button';
 import Header from '@/components/Header';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-
-  const login = () => {
-    alert('ログインしました');
-  };
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -22,8 +20,11 @@ export default function Home() {
           </div>
           <h1 className="text-2xl text-center mt-6">協力隊の輪</h1>
           <div className="text-center mt-10">
-            <Button onClick={() => login()}>ログイン</Button>
-
+            {status === 'authenticated' ? (
+              <Button onClick={() => signOut()}>ログアウト</Button>
+            ) : (
+              <Button onClick={() => signIn('google', {}, { prompt: 'login' })}>ログイン</Button>
+            )}
             {showModal && (
               <div className="h-full fixed left-0 top-0 z-modal flex w-full overflow-hidden overscroll-none">
                 <button
