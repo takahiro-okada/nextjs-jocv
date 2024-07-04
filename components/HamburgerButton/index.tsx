@@ -26,16 +26,29 @@ export default function HamburgerButton() {
       >
         <ul className="mt-6">
           <li>
-            <Link href="/">ホーム</Link>
+            <Link className="py-2 px-2 inline-block" href="/">
+              ホーム
+            </Link>
           </li>
           <li>
-            <Link href="/cohorts">隊次から調べる</Link>
+            <Link className="py-2 px-2 inline-block" href="/cohorts/">
+              隊次から調べる
+            </Link>
           </li>
           <li>
-            <Link href="/dispatchedcountry">任地から調べる</Link>
+            <Link className="py-2 px-2 inline-block" href="/dispatchedcountry/">
+              任地から調べる
+            </Link>
           </li>
           <li>
-            <Link href="/currentaddress">現住所から調べる</Link>
+            <Link className="py-2 px-2 inline-block" href="/currentaddress/">
+              現住所から調べる
+            </Link>
+          </li>
+          <li>
+            <Link className="py-2 px-2 inline-block" href="/dashboard/setting/">
+              設定
+            </Link>
           </li>
         </ul>
       </nav>
