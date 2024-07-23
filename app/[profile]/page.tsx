@@ -3,18 +3,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Image from 'next/image';
 
-interface SearchOption {
-  iconSrc: string;
-  label: string;
-}
-
 export default function Profile() {
-  const options: SearchOption[] = [
-    { iconSrc: '/images/icon-globe.svg', label: '任地から探す' },
-    { iconSrc: '/images/icon-map.svg', label: '現住所から探す' },
-    { iconSrc: '/images/icon-people.svg', label: '隊次から探す' },
-  ];
-
   return (
     <>
       <Header />
