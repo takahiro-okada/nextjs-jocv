@@ -1,13 +1,7 @@
 import Link from 'next/link';
+import { UserType } from '@/app/type';
 
-type ProfileCardProps = {
-  name: string;
-  location: string;
-  image: string;
-  description: string;
-};
-
-export default function ProfileCard({ name, location, image, description }: ProfileCardProps) {
+export default function ProfileCard({ name, location, image, bio }: UserType) {
   return (
     <Link href="#" className="block bg-white rounded-lg shadow-md p-6 mb-4">
       <div className="flex items-center">
@@ -17,7 +11,7 @@ export default function ProfileCard({ name, location, image, description }: Prof
           <p className="text-gray-600">{location}</p>
         </div>
       </div>
-      <p className="mt-4 text-gray-800">{description}</p>
+      <p className="mt-4 text-gray-800">{bio}</p>
     </Link>
   );
 }
