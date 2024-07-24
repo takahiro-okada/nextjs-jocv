@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-// GETリクエストを処理する関数をデフォルトエクスポート
 export async function GET() {
   try {
     await prisma.$connect();
