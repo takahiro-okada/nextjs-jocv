@@ -1,22 +1,17 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import ProfileCard from '@/components/ProfileCard';
 import Image from 'next/image';
-import { UserType } from '@/app/type';
 
-async function fetchAllUsers() {
-  console.log('API URL:', process.env.NEXT_PUBLIC_API_URL); // 環境変数のログ出力
-  if (!process.env.NEXT_PUBLIC_API_URL) {
-    throw new Error('API URL is not defined in the environment variables');
-  }
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
-    cache: 'no-cache',
-  });
-  return res.json();
-}
+// async function fetchAllUsers() {
+//   console.log('API URL:', 'https://nextjs-jocv-g9i70urcy-takahirookadas-projects.vercel.app/'); // 環境変数のログ出力
+//   const res = await fetch(`https://nextjs-jocv-g9i70urcy-takahirookadas-projects.vercel.app/api/users`, {
+//     cache: 'no-cache',
+//   });
+//   return res.json();
+// }
 
 export default async function Page() {
-  const users: UserType[] = await fetchAllUsers();
+  // const users: UserType[] = await fetchAllUsers();
 
   return (
     <>
@@ -26,11 +21,11 @@ export default async function Page() {
           <Image src="/images/icon-member.svg" alt="" width={40} height={40} />
         </div>
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           {users.map((user: UserType, index: number) => (
             <ProfileCard key={index} {...user} />
           ))}
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
