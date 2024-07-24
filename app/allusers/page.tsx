@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { UserType } from '@/app/type';
 
 async function fetchAllUsers() {
-  const res = await fetch('http://localhost:3000/api/users', {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
     cache: 'no-cache',
   });
 
