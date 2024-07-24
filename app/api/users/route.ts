@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 // GETリクエストを処理する関数をデフォルトエクスポート
-export default async function () {
+export async function GET() {
   try {
     await prisma.$connect();
     const users = await prisma.user.findMany();
