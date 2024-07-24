@@ -8,7 +8,7 @@ export default function Header() {
   const { data: session, status } = useSession();
   return (
     <header>
-      <div className="flex justify-between px-4 py-4">
+      <div className="flex justify-between p-4">
         <Link href="/" className="flex items-center">
           <Image src="/images/logo.png" alt="logo" width={30} height={30} />
           <h1 className="ml-3">協力隊の輪</h1>
@@ -20,7 +20,7 @@ export default function Header() {
               <Image src={session.user?.image ?? ``} alt="logo" width={45} height={45} />
             </Link>
           ) : (
-            <Link href="/login" className='className="px-4 py-2 bg-main-500 text-white rounded-md"'>
+            <Link href="/login" className="rounded-md px-4 py-2 text-white">
               ログイン
             </Link>
           )}

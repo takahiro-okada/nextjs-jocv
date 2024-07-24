@@ -1,3 +1,5 @@
+import React from 'react';
+
 type ButtonProps = {
   children: React.ReactNode;
   onClick: () => void;
@@ -5,7 +7,7 @@ type ButtonProps = {
 
 export default function Button({ children, onClick }: ButtonProps) {
   return (
-    <button onClick={onClick} className="border border-gray-300 inline-block rounded-3xl px-4 py-2 min-w-32">
+    <button onClick={onClick} className="inline-block min-w-32 rounded-3xl border border-gray-300 px-4 py-2">
       {children}
     </button>
   );

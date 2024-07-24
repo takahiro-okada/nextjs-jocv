@@ -13,11 +13,11 @@ export default function Home() {
       <Header />
       <main className="">
         <div className="px-4">
-          <div className="w-16 mt-24 mx-auto">
+          <div className="mx-auto mt-24 w-16">
             <Image src="/images/logo.png" alt="logo" width={150} height={150} />
           </div>
-          <h1 className="text-2xl text-center mt-6">協力隊の輪</h1>
-          <div className="text-center mt-10">
+          <h1 className="mt-6 text-center text-2xl">協力隊の輪</h1>
+          <div className="mt-10 text-center">
             {status === 'authenticated' ? (
               <Button onClick={() => signOut()}>ログアウト</Button>
             ) : (

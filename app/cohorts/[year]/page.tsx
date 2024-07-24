@@ -29,7 +29,7 @@ export default function Page({ params }: { params: { year: string } }) {
     <>
       <Header />
       <div className="px-4">
-        <div className="text-2xl flex items-center">
+        <div className="flex items-center text-2xl">
           <Image src="/images/icon-member.svg" alt="" width={40} height={40} />
           <h1 className="ml-2">{params.year}年に参加したJOCV</h1>
         </div>

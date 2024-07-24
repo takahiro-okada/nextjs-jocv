@@ -11,11 +11,11 @@ export default function DispatchedCountry() {
     <>
       <Header />
 
-      <main className="mt-8 mx-4">
+      <main className="mx-4 mt-8">
         <SectionTitle title="派遣国" />
 
         <div className="mt-8">
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {regions.map((region) => {
               const regionCountries = countries.filter((country) => country.regionId === region.id);
               const regionUserCount = users.filter((user) =>
@@ -23,8 +23,8 @@ export default function DispatchedCountry() {
               ).length;
 
               return (
-                <Link href={`/dispatchedcountry/${region.slug}`} className="text-lg font-bold">
-                  <li key={region.id} className="border p-4 rounded-lg">
+                <Link key={region.id} href={`/dispatchedcountry/${region.slug}`} className="text-lg font-bold">
+                  <li className="rounded-lg border p-4">
                     {region.name}
                     <p className="mt-2">国数: {regionCountries.length}</p>
                     <p>ユーザー数: {regionUserCount}</p>

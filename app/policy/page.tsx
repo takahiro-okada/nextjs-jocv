@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <main className="mt-8 mx-4">
+      <main className="mx-4 mt-8">
         <h1 className="text-3xl font-extrabold">Policy</h1>
       </main>
       <Footer />
