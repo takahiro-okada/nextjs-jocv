@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import ProfileCard from '@/components/ProfileCard';
 import Image from 'next/image';
 import { JAPAN_REGIONS } from '@/constants/prefectures';
 
@@ -19,26 +18,26 @@ export default function Page({ params }: { params: { currentaddress: string } })
   // URLから取得したローマ字表記を日本語表記に変換
   const prefectureName = getPrefectureName(params.currentaddress);
 
-  const profiles = [
-    {
-      name: '山田 花子',
-      location: 'タンザニア 愛知県',
-      image: '/images/sample-person.jpg',
-      description: 'Hello World',
-    },
-    {
-      name: '山田 花子',
-      location: 'タンザニア 愛知県',
-      image: '/images/sample-person.jpg',
-      description: 'Hello World',
-    },
-    {
-      name: '山田 花子',
-      location: 'タンザニア 愛知県',
-      image: '/images/sample-person.jpg',
-      description: 'Hello World',
-    },
-  ];
+  // const profiles = [
+  //   {
+  //     name: '山田 花子',
+  //     location: 'タンザニア 愛知県',
+  //     image: '/images/sample-person.jpg',
+  //     description: 'Hello World',
+  //   },
+  //   {
+  //     name: '山田 花子',
+  //     location: 'タンザニア 愛知県',
+  //     image: '/images/sample-person.jpg',
+  //     description: 'Hello World',
+  //   },
+  //   {
+  //     name: '山田 花子',
+  //     location: 'タンザニア 愛知県',
+  //     image: '/images/sample-person.jpg',
+  //     description: 'Hello World',
+  //   },
+  // ];
 
   return (
     <>
@@ -49,11 +48,11 @@ export default function Page({ params }: { params: { currentaddress: string } })
           <h1 className="ml-2">{prefectureName}在住のJOCV</h1>
         </div>
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           {profiles.map((profile, index) => (
             <ProfileCard key={index} {...profile} />
           ))}
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
