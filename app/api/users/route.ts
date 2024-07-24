@@ -3,22 +3,15 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function main() {
+// GETリクエストを処理する関数をデフォルトエクスポート
+export default async function () {
   try {
     await prisma.$connect();
-  } catch (error) {
-    return Error('Failed to connect to database');
-  }
-}
-
-export const GET = async () => {
-  try {
-    await main();
     const users = await prisma.user.findMany();
-    return NextResponse.json(users, { status: 200 });
-  } catch (err) {
-    return NextResponse.json({ message: 'Server error', err }, { status: 500 });
+    return NextResponse.json(users);
+  } catch (error) {
+    return NextResponse.json({ message: 'Server error', error }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }
-};
+}
