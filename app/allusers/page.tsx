@@ -5,11 +5,12 @@ import Image from 'next/image';
 import { UserType } from '@/app/type';
 
 async function fetchAllUsers() {
-  console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
+  if (!`${process.env.NEXT_PUBLIC_API_URL}`) {
+    throw new Error('API URL is not defined in the environment variables');
+  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
     cache: 'no-cache',
   });
-
   return res.json();
 }
 
