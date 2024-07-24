@@ -9,7 +9,7 @@ export default function Page() {
     <>
       <Header />
 
-      <main className="mt-8 mx-4">
+      <main className="mx-4 mt-8">
         <SectionTitle title="派遣時期" />
 
         <div className="mt-8">

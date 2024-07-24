@@ -11,7 +11,7 @@ export async function main() {
   }
 }
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async () => {
   try {
     await main();
     const users = await prisma.user.findMany();

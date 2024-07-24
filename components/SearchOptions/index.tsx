@@ -13,13 +13,13 @@ export default function SearchOptions() {
   ];
 
   return (
-    <div className="flex justify-center space-x-4 p-4 mt-10">
+    <div className="mt-10 flex justify-center space-x-4 p-4">
       {options.map((option, index) => (
         <div key={index} className="flex flex-col items-center">
-          <div className="bg-gray-100 rounded-full p-4 mb-2">
+          <div className="mb-2 rounded-full bg-gray-100 p-4">
             <Image src={option.iconSrc} alt={option.label} width={36} height={36} />
           </div>
-          <span className="text-sm text-center">{option.label}</span>
+          <span className="text-center text-sm">{option.label}</span>
         </div>
       ))}
     </div>

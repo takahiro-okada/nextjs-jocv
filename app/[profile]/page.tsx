@@ -13,15 +13,15 @@ export default function Profile() {
             <Image
               src="/images/sample-person.jpg"
               alt="user profile"
-              className="rounded-full w-36 h-36 object-cover"
+              className="size-36 rounded-full object-cover"
               width={600}
               height={600}
             />
           </div>
-          <div className="text-xl mt-3 text-center">Yamada Tarou</div>
+          <div className="mt-3 text-center text-xl">Yamada Tarou</div>
           <div className="text-center">愛知県</div>
           <p className="mt-4">プロフィール情報が入ります</p>
-          <div className="flex justify-between mt-8">
+          <div className="mt-8 flex justify-between">
             <div className="">
               <div className="">タンザニア</div>
               <div className="">26年1次隊</div>
@@ -29,7 +29,7 @@ export default function Profile() {
             <div className="">
               <a
                 href=""
-                className="bg-[#F7FAFC] border border-[#E7E7E7] text-center inline-block rounded-3xl px-4 py-2 min-w-32"
+                className="inline-block min-w-32 rounded-3xl border border-[#E7E7E7] bg-[#F7FAFC] px-4 py-2 text-center"
               >
                 Follow
               </a>

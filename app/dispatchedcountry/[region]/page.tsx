@@ -16,12 +16,12 @@ export default function RegionPage({ params }: { params: { region: string } }) {
     <>
       <Header />
 
-      <main className="mt-8 mx-4">
+      <main className="mx-4 mt-8">
         <SectionTitle title={`派遣国 - ${region?.name}`} />
 
         <div className="mt-8">
-          <h2 className="text-xl mb-4">ユーザー一覧</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <h2 className="mb-4 text-xl">ユーザー一覧</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {regionUsers.map((user) => (
               <ProfileCard
                 key={user.id}

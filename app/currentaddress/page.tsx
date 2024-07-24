@@ -10,7 +10,7 @@ export default function CurrentCountry() {
     <>
       <Header />
 
-      <main className="mt-8 mx-4">
+      <main className="mx-4 mt-8">
         <SectionTitle title="現住所" />
 
         <div className="mt-8">
@@ -19,7 +19,7 @@ export default function CurrentCountry() {
             {JAPAN_REGIONS.map((region) => (
               <div key={region.name} className="mt-10">
                 <h4 className="text-xl">{region.name}</h4>
-                <ul className="grid grid-cols-2 gap-4 mt-4">
+                <ul className="mt-4 grid grid-cols-2 gap-4">
                   {region.prefectures.map((prefecture) => (
                     <li key={prefecture.name}>
                       <Link href={`currentaddress/${prefecture.romaji}`}>{prefecture.name}</Link>
