@@ -2,8 +2,17 @@ import SearchOptions from '@/components/SearchOptions';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import fetchUser from '@/app/queries/fetchUser';
 
-export default function Profile() {
+export default async function Profile({ params }: { params: { profile: number } }) {
+  const userId = params.profile;
+  const user = await fetchUser(userId);
+
+  if (!user) {
+    notFound();
+  }
+
   return (
     <>
       <Header />
@@ -18,9 +27,9 @@ export default function Profile() {
               height={600}
             />
           </div>
-          <div className="mt-3 text-center text-xl">Yamada Tarou</div>
-          <div className="text-center">愛知県</div>
-          <p className="mt-4">プロフィール情報が入ります</p>
+          <div className="mt-3 text-center text-xl">{user.name}</div>
+          {user.location && <div className="text-center">{user.location}</div>}
+          <p className="mt-4">{user.bio}</p>
           <div className="mt-8 flex justify-between">
             <div className="">
               <div className="">タンザニア</div>
