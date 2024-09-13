@@ -7,7 +7,6 @@ import ProfileCard from '@/components/ProfileCard';
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 async function fetchAllUsers() {
-  console.log(`Fetching users from: ${API_URL}/api/users`);
   const res = await fetch(`${API_URL}/api/users`, {
     cache: 'no-cache',
   });
@@ -18,9 +17,9 @@ async function fetchAllUsers() {
 }
 
 export default async function Page() {
-  try {
-    const users: UserType[] = await fetchAllUsers();
+  const users: UserType[] = await fetchAllUsers();
 
+  try {
     return (
       <>
         <Header />
@@ -39,7 +38,6 @@ export default async function Page() {
       </>
     );
   } catch (error) {
-    console.error('Error fetching users:', error);
     return <div>Error loading users. Please try again later.</div>;
   }
 }
