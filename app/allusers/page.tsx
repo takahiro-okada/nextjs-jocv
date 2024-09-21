@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const API_URL = 'http://localhost:3000';
 
 async function fetchAllUsers() {
   const res = await fetch(`${API_URL}/api/users`, {
