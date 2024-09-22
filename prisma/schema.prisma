@@ -13,6 +13,7 @@ model User {
   createdAt            DateTime  @default(now())
   image                String?
   currentAddressId     String?
+  bio                  String?
   deploymentLocationId String?
   cohortId             String?
   twitterUrl           String?
@@ -36,10 +37,21 @@ model Address {
   users                User[]   @relation("CurrentAddress")
 }
 
+enum Continent {
+  ASIA
+  AFRICA
+  EUROPE
+  NORTH_AMERICA
+  SOUTH_AMERICA
+  OCEANIA
+  ANTARCTICA
+}
+
 model Country {
   id                   String   @id @default(uuid())
   name                 String   @unique
   isDeveloping         Boolean  @default(false)
+  continent            Continent
   addresses            Address[]
   deploymentLocations  DeploymentLocation[]
   prefectures          Prefecture[]

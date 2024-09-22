@@ -4,6 +4,7 @@ export interface UserType {
   createdAt: string;
   image: string;
   currentAddressId: string;
+  bio: string;
   deploymentLocationId: string;
   cohortId: string;
   twitterUrl: string;
