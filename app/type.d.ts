@@ -1,68 +1,65 @@
 export interface UserType {
   id: number;
   name: string;
-  createdAt: string;
   image: string;
-  currentAddressId: string;
-  deploymentLocationId: string;
-  cohortId: string;
-  twitterUrl: string;
-  instagramUrl: string;
-  websiteUrl: string;
-  currentAddress: Address;
-  deploymentLocation: DeploymentLocation;
-  cohort: Cohort;
-  favorites: Favorite[];
-  favoritedBy: Favorite[];
+  currentCountry: {
+    id: string;
+    name: string;
+  };
+  currentPrefecture: {
+    id: string;
+    name: string;
+  };
+  deploymentCountry: {
+    id: string;
+    name: string;
+    slug: string;
+    isDeveloping: boolean;
+    continent: string;
+  };
+  bio: string;
 }
 
-export interface Address {
-  id: string;
-  countryId: string;
-  prefectureId: string;
-  city: string;
-  otherAddressDetails: string;
-  country: Country;
-  prefecture: Prefecture;
-  users: UserType[];
-}
-
-export interface Country {
+export interface PrefectureType {
   id: string;
   name: string;
-  isDeveloping: boolean;
-  addresses: Address[];
-  deploymentLocations: DeploymentLocation[];
-  prefectures: Prefecture[];
-}
-
-export interface Prefecture {
-  id: string;
-  name: string;
-  countryId: string;
-  country: Country;
-  addresses: Address[];
+  country: {
+    id: string;
+    name: string;
+  };
 }
 
 export interface DeploymentLocation {
-  id: string;
-  countryId: string;
-  specificLocation: string;
-  country: Country;
-  users: UserType[];
+  country: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  count: number;
 }
 
-export interface Cohort {
+export interface CountryType {
   id: string;
+  name: string;
+  slug: string;
+  isDeveloping: boolean;
+  continent: string;
+  currentUsers: UserType[];
+  deployedUsers: UserType[];
+  prefectures: PrefectureType[];
+}
+
+export interface CohortType {
+  id: string;
+  name: string;
   cohortYear: string;
   cohortTerm: string;
   users: UserType[];
 }
 
-export interface Favorite {
+export interface FavoriteType {
   id: string;
   userId: number;
   favoriteUserId: number;
-  user: UserType;
   favoriteUser: UserType;
 }
