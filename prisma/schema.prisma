@@ -8,84 +8,60 @@ datasource db {
 }
 
 model User {
-  id                   Int       @id @default(autoincrement())
+  id                   String     @id @default(uuid())
   name                 String
-  createdAt            DateTime  @default(now())
+  createdAt            DateTime   @default(now())
   image                String?
-  currentAddressId     String?
-  bio                  String?
-  deploymentLocationId String?
+  currentCountryId     String?
+  currentPrefectureId  String?
+  deploymentCountryId  String?
   cohortId             String?
   twitterUrl           String?
   instagramUrl         String?
   websiteUrl           String?
-  currentAddress       Address?  @relation("CurrentAddress", fields: [currentAddressId], references: [id])
-  deploymentLocation   DeploymentLocation? @relation(fields: [deploymentLocationId], references: [id])
-  cohort               Cohort?   @relation(fields: [cohortId], references: [id])
-  favorites            Favorite[] @relation("UserFavorites")
+  bio                  String?
+  currentCountry       Country?   @relation("CurrentCountry", fields: [currentCountryId], references: [id])
+  currentPrefecture    Prefecture? @relation(fields: [currentPrefectureId], references: [id])
+  deploymentCountry    Country?   @relation("DeploymentCountry", fields: [deploymentCountryId], references: [id])
+  cohort               Cohort?    @relation(fields: [cohortId], references: [id])
   favoritedBy          Favorite[] @relation("FavoritedUsers")
-}
-
-model Address {
-  id                   String   @id @default(uuid())
-  countryId            String
-  prefectureId         String?
-  city                 String?
-  otherAddressDetails  String?
-  country              Country  @relation(fields: [countryId], references: [id])
-  prefecture           Prefecture? @relation(fields: [prefectureId], references: [id])
-  users                User[]   @relation("CurrentAddress")
-}
-
-enum Continent {
-  ASIA
-  AFRICA
-  EUROPE
-  NORTH_AMERICA
-  SOUTH_AMERICA
-  OCEANIA
-  ANTARCTICA
+  favorites            Favorite[] @relation("UserFavorites")
 }
 
 model Country {
-  id                   String   @id @default(uuid())
-  name                 String   @unique
-  isDeveloping         Boolean  @default(false)
-  continent            Continent
-  addresses            Address[]
-  deploymentLocations  DeploymentLocation[]
-  prefectures          Prefecture[]
+  id                  String     @id @default(uuid())
+  name                String     @unique
+  slug                String     @unique
+  isDeveloping        Boolean    @default(false)
+  continent           String?
+  currentUsers        User[]     @relation("CurrentCountry")
+  deployedUsers       User[]     @relation("DeploymentCountry")
+  prefectures         Prefecture[]
 }
 
 model Prefecture {
-  id                   String   @id @default(uuid())
-  name                 String
-  countryId            String
-  country              Country  @relation(fields: [countryId], references: [id])
-  addresses            Address[]
-}
-
-model DeploymentLocation {
-  id                   String   @id @default(uuid())
-  countryId            String
-  specificLocation     String
-  country              Country  @relation(fields: [countryId], references: [id])
-  users                User[]
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  countryId String
+  country   Country  @relation(fields: [countryId], references: [id])
+  users     User[]
 }
 
 model Cohort {
-  id                   String   @id @default(uuid())
-  cohortYear           String
-  cohortTerm           String
-  users                User[]
+  id         String @id @default(uuid())
+  name       String
+  cohortYear String
+  cohortTerm String
+  users      User[]
 }
 
 model Favorite {
-  id                   String   @id @default(uuid())
-  userId               Int
-  favoriteUserId       Int
-  user                 User     @relation("UserFavorites", fields: [userId], references: [id])
-  favoriteUser         User     @relation("FavoritedUsers", fields: [favoriteUserId], references: [id])
+  id             String @id @default(uuid())
+  userId         String
+  favoriteUserId String
+  favoriteUser   User   @relation("FavoritedUsers", fields: [favoriteUserId], references: [id])
+  user           User   @relation("UserFavorites", fields: [userId], references: [id])
 
   @@unique([userId, favoriteUserId])
 }
