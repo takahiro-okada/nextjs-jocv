@@ -8,18 +8,34 @@ export const GET = async () => {
     await prisma.$connect();
     const users = await prisma.user.findMany({
       include: {
-        currentAddress: {
-          include: {
-            prefecture: true,
-            country: true,
+        currentCountry: {
+          select: {
+            name: true,
+            slug: true,
+            isDeveloping: true,
+            continent: true,
           },
         },
-        deploymentLocation: {
-          include: {
-            country: true,
+        currentPrefecture: {
+          select: {
+            name: true,
+            slug: true,
           },
         },
-        cohort: true,
+        deploymentCountry: {
+          select: {
+            name: true,
+            slug: true,
+            isDeveloping: true,
+            continent: true,
+          },
+        },
+        cohort: {
+          select: {
+            cohortYear: true,
+            cohortTerm: true,
+          },
+        },
       },
     });
 
