@@ -28,7 +28,6 @@ export default async function Profile({ params }: { params: { profile: number } 
             />
           </div>
           <div className="mt-3 text-center text-xl">{user.name}</div>
-          {user.location && <div className="text-center">{user.location}</div>}
           <p className="mt-4">{user.bio}</p>
           <div className="mt-8 flex justify-between">
             <div className="">
