@@ -1,5 +1,7 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
 async function fetchRegionUsers(region: string) {
-  const res = await fetch(`http://localhost:3000/api/deploymentlocations/${region}/users`, {
+  const res = await fetch(`${API_URL}/api/deploymentlocations/${region}/users`, {
     cache: 'no-cache',
   });
   if (!res.ok) {

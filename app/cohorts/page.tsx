@@ -1,10 +1,17 @@
 import Header from '@/components/Header';
-import Link from 'next/link';
 import Footer from '@/components/Footer';
 import SectionTitle from '@/components/SectionTitle';
-import { cohorts } from '@/constants/cohorts';
+import fetchAllCohorts from '@/app/queries/fetchAllCohorts';
+import Link from 'next/link';
 
-export default function Page() {
+export default async function Page() {
+  const cohortsData = await fetchAllCohorts();
+  const cohorts = Object.values(cohortsData).sort((a, b) => {
+    if (a.year === '1990以前') return -1;
+    if (b.year === '1990以前') return 1;
+    return parseInt(a.year) - parseInt(b.year);
+  });
+
   return (
     <>
       <Header />
@@ -15,10 +22,9 @@ export default function Page() {
         <div className="mt-8">
           <ul className="grid grid-cols-2 gap-8">
             {cohorts.map((cohort) => (
-              <li key={cohort.id}>
+              <li key={cohort.year}>
                 <Link href={`/cohorts/${cohort.year}`} className="hover:text-blue-600">
-                  {cohort.year}年({cohort.era}
-                  {cohort.eraYear ? `${cohort.eraYear}年度` : ''})
+                  {cohort.year === '1990以前' ? cohort.year : `${cohort.year}年`} - ({cohort.totalUsers}人)
                 </Link>
               </li>
             ))}
