@@ -1,13 +1,11 @@
-import fetchCohortUsers from '@/app/queries/fetchCohortUsers';
-import { UserType } from '@/app/type';
+// import fetchCohortUsers from '@/app/queries/fetchCohortUsers';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import ProfileCard from '@/components/ProfileCard';
 import Image from 'next/image';
 
 export default async function Page({ params }: { params: { year: string } }) {
-  const data = await fetchCohortUsers(parseInt(params.year));
-  const users = data.users;
+  // const data = await fetchCohortUsers(parseInt(params.year));
+  // const users = data.users;
 
   return (
     <>
@@ -18,7 +16,7 @@ export default async function Page({ params }: { params: { year: string } }) {
           <h2 className="mb-4 text-xl">{params.year}年に参加したJOCV</h2>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {users.map((user: UserType) => (
+          {/* {users.map((user: UserType) => (
             <ProfileCard
               key={user.id}
               name={user.name}
@@ -29,7 +27,7 @@ export default async function Page({ params }: { params: { year: string } }) {
               currentPrefecture={user.currentPrefecture}
               bio={user.bio}
             />
-          ))}
+          ))} */}
         </div>
       </div>
       <Footer />
