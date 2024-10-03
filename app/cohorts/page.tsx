@@ -5,7 +5,7 @@ import fetchAllCohorts from '@/app/queries/fetchAllCohorts';
 import Link from 'next/link';
 
 export default async function Page() {
-  const cohortsData = await fetchAllCohorts();
+  const cohortsData: { [key: string]: { year: string; totalUsers: number } } = await fetchAllCohorts();
   const cohorts = Object.values(cohortsData).sort((a, b) => {
     if (a.year === '1990以前') return -1;
     if (b.year === '1990以前') return 1;

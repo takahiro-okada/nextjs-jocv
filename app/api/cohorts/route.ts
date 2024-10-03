@@ -30,7 +30,7 @@ export const GET = async () => {
       },
     });
 
-    const groupedCohorts: GroupedCohorts = cohorts.reduce((acc, cohort) => {
+    const groupedCohorts: GroupedCohorts = cohorts.reduce((acc: GroupedCohorts, cohort) => {
       if (cohort.users.length === 0) {
         return acc; // Skip cohorts with no users
       }
@@ -45,7 +45,7 @@ export const GET = async () => {
       }
 
       acc[year].terms.push({
-        id: cohort.id,
+        id: parseInt(cohort.id),
         term: cohort.cohortTerm,
         name: cohort.name,
         userCount: cohort.users.length,
