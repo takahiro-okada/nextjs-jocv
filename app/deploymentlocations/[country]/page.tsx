@@ -30,6 +30,11 @@ export default async function RegionPage({ params }: { params: { country: string
                 currentCountry={user.currentCountry}
                 currentPrefecture={user.currentPrefecture}
                 bio={user.bio}
+                favoritedBy={[]}
+                favorites={[]}
+                accounts={[]}
+                sessions={[]}
+                createdAt={new Date()}
               />
             ))}
           </div>

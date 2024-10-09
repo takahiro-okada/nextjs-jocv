@@ -1,23 +1,50 @@
+export interface AccountType {
+  id: string;
+  userId: string;
+  type: string;
+  provider: string;
+  providerAccountId: string;
+  refresh_token?: string;
+  access_token?: string;
+  expires_at?: number;
+  token_type?: string;
+  scope?: string;
+  id_token?: string;
+  session_state?: string;
+  user: UserType;
+}
+
+export interface SessionType {
+  id: string;
+  sessionToken: string;
+  userId: string;
+  expires: Date;
+  user: UserType;
+}
+
 export interface UserType {
-  id: number;
-  name: string;
-  image: string;
-  currentCountry: {
-    id: string;
-    name: string;
-  };
-  currentPrefecture: {
-    id: string;
-    name: string;
-  };
-  deploymentCountry: {
-    id: string;
-    name: string;
-    slug: string;
-    isDeveloping: boolean;
-    continent: string;
-  };
-  bio: string;
+  id: string;
+  name?: string;
+  createdAt: Date;
+  email?: string;
+  emailVerified?: Date;
+  image?: string;
+  currentCountryId?: string;
+  currentPrefectureId?: string;
+  deploymentCountryId?: string;
+  cohortId?: string;
+  twitterUrl?: string;
+  instagramUrl?: string;
+  websiteUrl?: string;
+  bio?: string;
+  currentCountry?: CountryType;
+  currentPrefecture?: PrefectureType;
+  deploymentCountry?: CountryType;
+  cohort?: CohortType;
+  favoritedBy: FavoriteType[];
+  favorites: FavoriteType[];
+  accounts: AccountType[];
+  sessions: SessionType[];
 }
 
 export interface PrefectureType {

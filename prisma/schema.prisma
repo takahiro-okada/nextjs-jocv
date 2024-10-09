@@ -7,44 +7,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String  @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
 model User {
-  id                   String     @id @default(uuid())
-  name                 String
-  createdAt            DateTime   @default(now())
-  image                String?
-  currentCountryId     String?
-  currentPrefectureId  String?
-  deploymentCountryId  String?
-  cohortId             String?
-  twitterUrl           String?
-  instagramUrl         String?
-  websiteUrl           String?
-  bio                  String?
-  currentCountry       Country?   @relation("CurrentCountry", fields: [currentCountryId], references: [id])
-  currentPrefecture    Prefecture? @relation(fields: [currentPrefectureId], references: [id])
-  deploymentCountry    Country?   @relation("DeploymentCountry", fields: [deploymentCountryId], references: [id])
-  cohort               Cohort?    @relation(fields: [cohortId], references: [id])
-  favoritedBy          Favorite[] @relation("FavoritedUsers")
-  favorites            Favorite[] @relation("UserFavorites")
+  id                  String      @id @default(uuid())
+  name                String?
+  createdAt           DateTime    @default(now())
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image               String?
+  currentCountryId    String?
+  currentPrefectureId String?
+  deploymentCountryId String?
+  cohortId            String?
+  twitterUrl          String?
+  instagramUrl        String?
+  websiteUrl          String?
+  bio                 String?
+  currentCountry      Country?    @relation("CurrentCountry", fields: [currentCountryId], references: [id])
+  currentPrefecture   Prefecture? @relation(fields: [currentPrefectureId], references: [id])
+  deploymentCountry   Country?    @relation("DeploymentCountry", fields: [deploymentCountryId], references: [id])
+  cohort              Cohort?     @relation(fields: [cohortId], references: [id])
+  favoritedBy         Favorite[]  @relation("FavoritedUsers")
+  favorites           Favorite[]  @relation("UserFavorites")
+  accounts            Account[]
+  sessions            Session[]
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+  @@unique([identifier, token])
+  @@map("verification_tokens")
 }
 
 model Country {
-  id                  String     @id @default(uuid())
-  name                String     @unique
-  slug                String     @unique
-  isDeveloping        Boolean    @default(false)
-  continent           String?
-  currentUsers        User[]     @relation("CurrentCountry")
-  deployedUsers       User[]     @relation("DeploymentCountry")
-  prefectures         Prefecture[]
+  id            String       @id @default(uuid())
+  name          String       @unique
+  slug          String       @unique
+  isDeveloping  Boolean      @default(false)
+  continent     String?
+  currentUsers  User[]       @relation("CurrentCountry")
+  deployedUsers User[]       @relation("DeploymentCountry")
+  prefectures   Prefecture[]
 }
 
 model Prefecture {
-  id        String   @id @default(uuid())
+  id        String  @id @default(uuid())
   name      String
-  slug      String   @unique
+  slug      String  @unique
   countryId String
-  country   Country  @relation(fields: [countryId], references: [id])
+  country   Country @relation(fields: [countryId], references: [id])
   users     User[]
 }
 

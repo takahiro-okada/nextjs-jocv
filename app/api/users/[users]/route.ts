@@ -7,9 +7,6 @@ const prisma = new PrismaClient();
 export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
     const userId = params.users;
-    if (isNaN(userId)) {
-      return NextResponse.json({ message: 'Invalid user ID' }, { status: 400 });
-    }
 
     const user = await prisma.user.findUnique({
       where: {
