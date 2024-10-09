@@ -1,4 +1,3 @@
-// app/api/user/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/libs/auth';
@@ -12,7 +11,6 @@ export async function GET() {
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
-
   const userId = session?.user?.id;
 
   if (!userId) {
