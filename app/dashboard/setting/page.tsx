@@ -1,25 +1,27 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { useProfile } from '@/hooks/useProfile';
 
 export default function Settings() {
-  // const { profile, isLoading, error, updateProfile } = useProfile();
+  const { profile, isLoading, error, updateProfile } = useProfile();
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
-  // if (!profile) return <div>No profile data available</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!profile) return <div>No profile data available</div>;
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   try {
-  //     await updateProfile(profile);
-  //     alert('Profile updated successfully');
-  //   } catch (error) {
-  //     console.error('Error updating profile:', error);
-  //     alert('Failed to update profile');
-  //   }
-  // };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await updateProfile(profile);
+      alert('Profile updated successfully');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile');
+    }
+  };
 
   return (
     <>
@@ -28,7 +30,8 @@ export default function Settings() {
         <div className="mx-4 mt-10">
           <h1 className="text-2xl">設定</h1>
           <hr className="my-3" />
-          {/* <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
+            {/* Profile Image */}
             <div className="mt-6">
               <p>プロフィール画像</p>
               <div className="flex items-center">
@@ -56,6 +59,7 @@ export default function Settings() {
               </div>
             </div>
 
+            {/* Display Name */}
             <div className="mt-6">
               <label htmlFor="name">表示名</label>
               <input
@@ -68,6 +72,7 @@ export default function Settings() {
               />
             </div>
 
+            {/* Bio */}
             <div className="mt-6">
               <label htmlFor="bio">自己紹介</label>
               <textarea
@@ -81,7 +86,7 @@ export default function Settings() {
             </div>
 
             {/* Cohort Select Option */}
-          {/* <div className="mt-6">
+            {/* <div className="mt-6">
               <label htmlFor="cohort">コホート</label>
               <select
                 id="cohort"
@@ -99,8 +104,8 @@ export default function Settings() {
               </select>
             </div> */}
 
-          {/* Twitter */}
-          {/* <div className="mt-6">
+            {/* Twitter */}
+            <div className="mt-6">
               <label htmlFor="twitter">Twitter</label>
               <input
                 type="text"
@@ -110,10 +115,10 @@ export default function Settings() {
                 className="w-full rounded-xl border border-gray-300 px-4 py-2"
                 aria-required="false"
               />
-            </div> */}
+            </div>
 
-          {/* Instagram */}
-          {/* <div className="mt-6">
+            {/* Instagram */}
+            <div className="mt-6">
               <label htmlFor="instagram">Instagram</label>
               <input
                 type="text"
@@ -123,10 +128,10 @@ export default function Settings() {
                 className="w-full rounded-xl border border-gray-300 px-4 py-2"
                 aria-required="false"
               />
-            </div> */}
+            </div>
 
-          {/* Website */}
-          {/* <div className="mt-6">
+            {/* Website */}
+            <div className="mt-6">
               <label htmlFor="website">Website</label>
               <input
                 type="text"
@@ -136,15 +141,15 @@ export default function Settings() {
                 className="w-full rounded-xl border border-gray-300 px-4 py-2"
                 aria-required="false"
               />
-            </div> */}
+            </div>
 
-          {/* Save Button */}
-          {/* <div className="mt-6">
+            {/* Save Button */}
+            <div className="mt-6">
               <button type="submit" className="rounded-full border px-4 py-2">
                 更新する
               </button>
             </div>
-          </form>  */}
+          </form>
         </div>
       </main>
       <Footer />
