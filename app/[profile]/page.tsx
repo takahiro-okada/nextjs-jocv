@@ -1,17 +1,15 @@
 import SearchOptions from '@/components/SearchOptions';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import fetchUser from '@/app/queries/fetchUser';
 
 export default async function Profile({ params }: { params: { profile: number } }) {
-  const userId = params.profile;
-  const user = await fetchUser(userId);
+  console.log(params);
+  // const userId = params.profile;
+  // const user = await fetchUser(userId);
 
-  if (!user) {
-    notFound();
-  }
+  // if (!user) {
+  //   notFound();
+  // }
 
   return (
     <>
@@ -19,16 +17,16 @@ export default async function Profile({ params }: { params: { profile: number } 
       <main>
         <div className="mx-4 mt-10">
           <div className="flex justify-center">
-            <Image
+            {/* <Image
               src={user.image || '/default-profile.png'}
               alt="user profile"
               className="size-36 rounded-full object-cover"
               width={600}
               height={600}
-            />
+            /> */}
           </div>
-          <div className="mt-3 text-center text-xl">{user.name}</div>
-          <p className="mt-4">{user.bio}</p>
+          {/* <div className="mt-3 text-center text-xl">{user.name}</div> */}
+          {/* <p className="mt-4">{user.bio}</p> */}
           <div className="mt-8 flex justify-between">
             <div className="">
               <div className="">タンザニア</div>
