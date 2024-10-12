@@ -33,6 +33,14 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    redirect: async ({ url, baseUrl }) => {
+      if (url.startsWith(baseUrl)) {
+        return `${baseUrl}/dashboard/setting/`;
+      } else if (url.startsWith('/')) {
+        return `${baseUrl}${url}`;
+      }
+      return url;
+    },
   },
   providers: [
     GoogleProvider({

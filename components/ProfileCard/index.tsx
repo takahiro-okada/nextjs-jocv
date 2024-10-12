@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 export default function ProfileCard(user: UserType) {
   const { id, name, image, currentCountry, deploymentCountry, bio } = user;
-  const imageUrl = image ? `http://localhost:3000/images/${image}` : '/images/sample-person.jpg';
 
   return (
     <Link href={`/${id}`} passHref className="mb-4 block rounded-lg bg-white p-6 shadow-md">
@@ -12,7 +11,7 @@ export default function ProfileCard(user: UserType) {
         <Image
           width={200}
           height={200}
-          src={imageUrl}
+          src={image || '/images/default-avatar.jpg'}
           alt={name || ''}
           className="mr-4 size-16 rounded-full object-cover"
         />

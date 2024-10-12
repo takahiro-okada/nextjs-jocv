@@ -20,7 +20,7 @@ export default async function Profile({ params }: { params: { profile: number } 
         <div className="mx-4 mt-10">
           <div className="flex justify-center">
             <Image
-              src="/images/sample-person.jpg"
+              src={user.image || '/default-profile.png'}
               alt="user profile"
               className="size-36 rounded-full object-cover"
               width={600}
