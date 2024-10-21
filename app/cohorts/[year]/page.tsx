@@ -13,11 +13,11 @@ export default async function Page({ params }: { params: { year: string } }) {
     <>
       <Header />
       <div className="px-4">
-        <div className="flex items-center text-2xl">
+        <div className="mt-6 flex items-center text-2xl">
           <Image src="/images/icon-member.svg" alt="" width={40} height={40} />
-          <h2 className="mb-4 text-xl">{params.year}年に参加したJOCV</h2>
+          <h2 className="text-xl">{params.year}年に参加したJOCV</h2>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {users.map((user: UserType) => (
             <ProfileCard
               key={user.id}
