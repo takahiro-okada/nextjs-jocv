@@ -10,7 +10,7 @@ export default function Footer() {
               <Link href="/">ホーム</Link>
             </li>
             <li>
-              <Link href="/policy">規約とポリシー</Link>
+              <Link href="/policy">規約</Link>
             </li>
             <li>
               <Link href="/howto">使い方</Link>
