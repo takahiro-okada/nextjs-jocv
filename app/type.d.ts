@@ -61,6 +61,7 @@ export interface DeploymentLocation {
     id: string;
     name: string;
     slug: string;
+    continent: string;
   };
   count: number;
 }

@@ -31,8 +31,13 @@ export default async function Profile({ params }: { params: { profile: number } 
           <p className="mt-4">{user.bio}</p>
           <div className="mt-8 flex justify-between">
             <div className="">
-              <div className="">タンザニア</div>
-              <div className="">26年1次隊</div>
+              <div className="">
+                現住所：{user.currentCountry?.name ?? '登録がありません'} {user.currentPrefecture?.name}
+              </div>
+              <div className="">派遣国：{user.deploymentCountry?.name ?? '登録がありません'}</div>
+              <div className="">
+                派遣隊次：{user.cohort?.cohortYear}年{user.cohort?.cohortTerm}期
+              </div>
             </div>
             <div className="">
               <a

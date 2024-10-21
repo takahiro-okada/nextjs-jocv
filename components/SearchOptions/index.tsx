@@ -9,7 +9,7 @@ type SearchOption = {
 
 export default function SearchOptions() {
   const options: SearchOption[] = [
-    { iconSrc: '/images/icon-globe.svg', label: '任地から探す', slug: '/dispatchedcountry' },
+    { iconSrc: '/images/icon-globe.svg', label: '任地から探す', slug: '/deploymentlocations' },
     { iconSrc: '/images/icon-map.svg', label: '現住所から探す', slug: '/currentaddress' },
     { iconSrc: '/images/icon-people.svg', label: '隊次から探す', slug: '/cohorts' },
   ];
