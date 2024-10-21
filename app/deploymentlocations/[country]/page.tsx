@@ -5,20 +5,22 @@ import SectionTitle from '@/components/SectionTitle';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchRegionUsers from '@/app/queries/fetchRegionUsers';
+import fetchCountry from '@/app/queries/fetchContry';
 
 export default async function RegionPage({ params }: { params: { country: string } }) {
-  const region = { slug: params.country };
-  const users: UserType[] = await fetchRegionUsers(region.slug);
+  const countrySlug = params.country;
+  const country = await fetchCountry(countrySlug);
+  const users: UserType[] = await fetchRegionUsers(countrySlug);
 
   return (
     <>
       <Header />
 
       <main className="mx-4 mt-8">
-        <SectionTitle title={`派遣国 - ${region.slug}`} />
+        <SectionTitle title={`派遣国 - ${country.name}`} />
 
         <div className="mt-8">
-          <h2 className="mb-4 text-xl">ユーザー一覧</h2>
+          <h2 className="text-xl">ユーザー一覧</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {users.map((user) => (
               <ProfileCard
