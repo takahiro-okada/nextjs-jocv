@@ -2,26 +2,38 @@ import Link from 'next/link';
 import { UserType } from '@/app/type';
 import Image from 'next/image';
 
-export default function ProfileCard(user: UserType) {
+export default function ProfileCard({ user }: { user: UserType }) {
   const { id, name, image, currentCountry, deploymentCountry, bio } = user;
 
   return (
-    <Link href={`/${id}`} passHref className="mb-4 block rounded-lg bg-white p-6 shadow-md">
-      <div className="flex items-center">
-        <Image
-          width={200}
-          height={200}
-          src={image || '/images/default-avatar.jpg'}
-          alt={name || ''}
-          className="mr-4 size-16 rounded-full object-cover"
-        />
-        <div>
-          <h2 className="text-xl font-bold">{name}</h2>
-          {currentCountry?.name && <p className="text-gray-600">現住所：{currentCountry.name}</p>}
-          {deploymentCountry?.name && <p className="text-gray-600">派遣国：{deploymentCountry.name}</p>}
+    <Link href={`/${id}`} className="block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg">
+      <div className="p-6">
+        <div className="mb-4 flex items-center">
+          <Image
+            width={64}
+            height={64}
+            src={image || '/images/default-avatar.jpg'}
+            alt={name || ''}
+            className="rounded-full object-cover"
+          />
+          <div className="ml-4">
+            <h2 className="text-xl font-bold">{name}</h2>
+            {currentCountry?.name && (
+              <p className="text-sm text-gray-600">
+                現住所：
+                <span className="font-medium ">{currentCountry.name}</span>
+              </p>
+            )}
+            {deploymentCountry?.name && (
+              <p className="text-sm text-gray-600">
+                派遣国：
+                <span className="font-medium">{deploymentCountry.name}</span>
+              </p>
+            )}
+          </div>
         </div>
+        {bio && <p className="line-clamp-3 text-gray-700">{bio}</p>}
       </div>
-      <p className="mt-4 text-gray-800">{bio}</p>
     </Link>
   );
 }

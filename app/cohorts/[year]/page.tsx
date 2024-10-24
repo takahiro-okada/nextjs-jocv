@@ -19,21 +19,7 @@ export default async function Page({ params }: { params: { year: string } }) {
         </div>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {users.map((user: UserType) => (
-            <ProfileCard
-              key={user.id}
-              name={user.name}
-              deploymentCountry={user.deploymentCountry}
-              image={user.image}
-              id={user.id}
-              currentCountry={user.currentCountry}
-              currentPrefecture={user.currentPrefecture}
-              bio={user.bio}
-              favoritedBy={[]}
-              favorites={[]}
-              accounts={[]}
-              sessions={[]}
-              createdAt={new Date()}
-            />
+            <ProfileCard key={user.id} user={user} />
           ))}
         </div>
       </div>

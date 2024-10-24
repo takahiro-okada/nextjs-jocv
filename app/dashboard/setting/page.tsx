@@ -26,8 +26,8 @@ export default function Settings() {
   return (
     <>
       <Header />
-      <main>
-        <div className="mx-4 mt-10">
+      <main className="container mx-auto px-4">
+        <div>
           <h1 className="text-2xl">設定</h1>
           <hr className="my-3" />
           <form onSubmit={handleSubmit}>

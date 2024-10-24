@@ -19,7 +19,7 @@ export default async function Page() {
 
           <div className="mt-10">
             {users.map((user: UserType, index: number) => (
-              <ProfileCard key={index} {...user} />
+              <ProfileCard key={index} user={user} />
             ))}
           </div>
         </div>
