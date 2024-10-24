@@ -16,15 +16,23 @@ export default async function Page() {
     <>
       <Header />
 
-      <main className="mx-4 mt-8">
+      <main className="container mx-auto px-4 py-8">
         <SectionTitle title="派遣時期" />
 
         <div className="mt-8">
-          <ul className="grid grid-cols-2 gap-8">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {cohorts.map((cohort) => (
-              <li key={cohort.year}>
-                <Link href={`/cohorts/${cohort.year}`} className="hover:text-blue-600">
-                  {cohort.year === '1990以前' ? cohort.year : `${cohort.year}年`} - ({cohort.totalUsers}人)
+              <li key={cohort.year} className="overflow-hidden rounded-lg border">
+                <Link
+                  href={`/cohorts/${cohort.year}`}
+                  className="block bg-white p-4 transition-colors hover:bg-blue-50"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-semibold">
+                      {cohort.year === '1990以前' ? cohort.year : `${cohort.year}年`}
+                    </span>
+                    <span className="rounded-full bg-blue-500 px-2 py-1 text-sm text-white">{cohort.totalUsers}人</span>
+                  </div>
                 </Link>
               </li>
             ))}

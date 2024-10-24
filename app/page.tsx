@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="">
+      <main className="container mx-auto px-4 py-8">
         <div className="px-4">
           <div className="mx-auto mt-24 w-16">
             <Image src="/images/logo.png" alt="logo" width={150} height={150} />

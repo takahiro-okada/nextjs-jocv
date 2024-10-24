@@ -40,11 +40,11 @@ export default function HamburgerButton() {
               任地から調べる
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link className="inline-block p-2" href="/currentaddress/">
               現住所から調べる
             </Link>
-          </li> */}
+          </li>
           <li>
             <Link className="inline-block p-2" href="/dashboard/setting/">
               設定
