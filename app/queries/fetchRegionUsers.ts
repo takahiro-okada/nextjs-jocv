@@ -2,7 +2,7 @@ import { UserType } from '@/app/type';
 
 const API_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
 
-export default async function fetchRegionUsers(region: string): Promise<UserType[]> {
+async function fetchRegionUsers(region: string): Promise<UserType[]> {
   const res = await fetch(`${API_URL}/api/deploymentlocations/${region}/users`, {
     cache: 'no-store',
   });
@@ -14,3 +14,5 @@ export default async function fetchRegionUsers(region: string): Promise<UserType
   }
   return res.json();
 }
+
+export default fetchRegionUsers;

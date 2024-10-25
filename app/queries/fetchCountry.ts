@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
 
-export default async function fetchCountry(country: string) {
+async function fetchCountry(country: string) {
   const res = await fetch(`${API_URL}/api/country/${country}/`, {
     cache: 'no-store',
   });
@@ -12,3 +12,5 @@ export default async function fetchCountry(country: string) {
   }
   return res.json();
 }
+
+export default fetchCountry;
