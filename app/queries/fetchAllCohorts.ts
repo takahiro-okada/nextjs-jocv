@@ -5,7 +5,7 @@ async function fetchAllCohorts() {
     cache: 'no-cache',
   });
   if (!res.ok) {
-    throw new Error(`Failed to fetch deployment locations: ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch cohorts: ${res.status} ${res.statusText}`);
   }
   return res.json();
 }
