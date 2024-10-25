@@ -62,7 +62,12 @@ export async function PUT(request: NextRequest) {
         currentPrefectureId: data.currentPrefectureId,
         deploymentCountryId: data.deploymentCountryId,
         cohortId: data.cohortId,
-        // 他のフィールドも必要に応じて追加
+      },
+      include: {
+        currentCountry: true,
+        currentPrefecture: true,
+        deploymentCountry: true,
+        cohort: true,
       },
     });
 

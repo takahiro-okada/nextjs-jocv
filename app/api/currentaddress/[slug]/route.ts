@@ -31,10 +31,7 @@ export async function GET(request: Request, { params }: { params: { slug: string
       },
     });
 
-    console.log('Fetched country data:', countryData); // ログを追加
-
     if (!countryData) {
-      console.log('Country not found'); // ログを追加
       return NextResponse.json({ error: 'Country not found' }, { status: 404 });
     }
 
