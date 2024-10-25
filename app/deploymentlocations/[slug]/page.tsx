@@ -5,10 +5,10 @@ import SectionTitle from '@/components/SectionTitle';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchRegionUsers from '@/app/queries/fetchRegionUsers';
-import fetchCountry from '@/app/queries/fetchContry';
+import fetchCountry from '@/app/queries/fetchCountry';
 
-export default async function RegionPage({ params }: { params: { country: string } }) {
-  const countrySlug = params.country;
+export default async function RegionPage({ params }: { params: { slug: string } }) {
+  const countrySlug = params.slug;
   const country = await fetchCountry(countrySlug);
   const users: UserType[] = await fetchRegionUsers(countrySlug);
 

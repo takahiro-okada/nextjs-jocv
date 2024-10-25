@@ -7,24 +7,20 @@ export async function GET(request: Request, { params }: { params: { country: str
   const { country } = params;
 
   try {
-    const users = await prisma.user.findMany({
-      where: {
-        deploymentCountry: {
-          slug: country,
-        },
-      },
+    const countryData = await prisma.country.findUnique({
+      where: { slug: country },
       select: {
         id: true,
         name: true,
-        currentPrefecture: {
-          select: {
-            name: true,
-          },
-        },
+        slug: true,
       },
     });
 
-    return NextResponse.json(users);
+    if (!countryData) {
+      return NextResponse.json({ error: 'Country not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(countryData);
   } catch (error) {
     console.error('Request error', error);
     return NextResponse.json({ error: 'Error fetching data' }, { status: 500 });
