@@ -4,18 +4,16 @@ import { NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 interface CohortTerm {
-  id: number;
+  id: string;
   term: string;
   name: string;
   userCount: number;
 }
 
 interface GroupedCohorts {
-  [key: string]: {
-    year: string;
-    terms: CohortTerm[];
-    totalUsers: number;
-  };
+  year: string;
+  terms: CohortTerm[];
+  totalUsers: number;
 }
 
 export const GET = async () => {
@@ -30,44 +28,43 @@ export const GET = async () => {
       },
     });
 
-    const groupedCohorts: GroupedCohorts = cohorts.reduce((acc: GroupedCohorts, cohort) => {
-      if (cohort.users.length === 0) {
-        return acc; // Skip cohorts with no users
-      }
-
+    const groupedCohorts: GroupedCohorts[] = cohorts.reduce((acc: GroupedCohorts[], cohort) => {
       const year = cohort.cohortYear === '1990以前' ? 'pre-1990' : cohort.cohortYear;
-      if (!acc[year]) {
-        acc[year] = {
+      let yearGroup = acc.find((group) => group.year === year);
+
+      if (!yearGroup) {
+        yearGroup = {
           year: cohort.cohortYear,
           terms: [],
           totalUsers: 0,
         };
+        acc.push(yearGroup);
       }
 
-      acc[year].terms.push({
-        id: parseInt(cohort.id),
+      yearGroup.terms.push({
+        id: cohort.id,
         term: cohort.cohortTerm,
         name: cohort.name,
         userCount: cohort.users.length,
       });
-      acc[year].totalUsers += cohort.users.length;
+      yearGroup.totalUsers += cohort.users.length;
 
       return acc;
-    }, {} as GroupedCohorts);
+    }, []);
 
     // Sort the terms within each year
-    Object.values(groupedCohorts).forEach((yearGroup) => {
+    groupedCohorts.forEach((yearGroup) => {
       yearGroup.terms.sort((a, b) => parseInt(a.term) - parseInt(b.term));
     });
 
-    // Convert the object to an array and sort by year
-    const sortedCohorts = Object.values(groupedCohorts).sort((a, b) => {
+    // Sort the years
+    groupedCohorts.sort((a, b) => {
       if (a.year === '1990以前') return -1;
       if (b.year === '1990以前') return 1;
       return parseInt(a.year) - parseInt(b.year);
     });
 
-    return NextResponse.json(sortedCohorts);
+    return NextResponse.json(groupedCohorts);
   } catch (error) {
     console.error('Error fetching cohorts:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
