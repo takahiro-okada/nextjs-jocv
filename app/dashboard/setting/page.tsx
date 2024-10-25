@@ -9,6 +9,7 @@ import fetchAllCountry from '@/app/queries/fetchAllCountry';
 import { UserType } from '@/app/type';
 import fetchPrefectures from '@/app/queries/fetchPrefectures';
 import fetchAllCohorts from '@/app/queries/fetchAllCohorts';
+import { toast } from 'react-toastify';
 
 interface CohortTerm {
   id: string;
@@ -76,8 +77,8 @@ export default function Settings() {
         deploymentCountryId: profile.deploymentCountryId,
         cohortId: profile.cohortId,
       });
+      toast.success('Profile updated successfully');
       setProfile(updatedProfile);
-      alert('Profile updated successfully');
     } catch (error) {
       console.error('Error updating profile:', error);
       alert('Failed to update profile');
