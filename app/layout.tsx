@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
 import NextAuthProvider from '@/app/providers/NextAuth';
+import ToastProvider from '@/components/ToastProvider';
 
 export const metadata: Metadata = {
   title: '協力隊の輪 | 青年海外協力隊のOBOGのプロフィールシェアアプリです',
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <ToastProvider>
+          <NextAuthProvider>{children}</NextAuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );
