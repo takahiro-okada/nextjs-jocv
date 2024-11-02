@@ -1,27 +1,35 @@
-export interface Cohort {
-  id: number;
-  year: number; // 西暦
-  era: string; // 元号
-  eraYear?: number; // 元号の年数
-}
+type Cohort = {
+  id: string;
+  year: number;
+  japaneseEra: string;
+  groups: string[];
+};
 
-export const cohorts: Cohort[] = [{ id: 1, year: 1999, era: '平成', eraYear: 11 }];
-
-cohorts.unshift({ id: 0, year: 2000, era: '2000年以前' });
-
-let nextId = 2;
-
-function getEra(year: number): { era: string; eraYear: number } {
-  if (year >= 1989 && year < 2019) {
-    return { era: '平成', eraYear: year - 1988 };
-  } else if (year >= 2019) {
-    return { era: '令和', eraYear: year - 2018 };
+function getJapaneseEra(year: number): string {
+  if (year >= 2019) {
+    return `令和${year - 2018}`;
+  } else if (year >= 1989) {
+    return `平成${year - 1988}`;
   } else {
-    return { era: '昭和', eraYear: year - 1925 };
+    return `昭和${year - 1925}`;
   }
 }
 
-for (let year = 2000; year <= new Date().getFullYear(); year++) {
-  const { era, eraYear } = getEra(year);
-  cohorts.push({ id: nextId++, year, era, eraYear });
-}
+export const COHORT_DATA: Cohort[] = [
+  {
+    id: 'pre-1990',
+    year: 1989,
+    japaneseEra: '1990以前',
+    groups: ['1990年以前の隊次'],
+  },
+  ...Array.from({ length: 35 }, (_, index) => {
+    const year = 1990 + index;
+    const japaneseEra = getJapaneseEra(year);
+    return {
+      id: `${year}`,
+      year,
+      japaneseEra,
+      groups: ['1次隊', '2次隊', '3次隊', '4次隊'].map((group) => `${japaneseEra}年度${group}`),
+    };
+  }),
+];
