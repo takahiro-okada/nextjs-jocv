@@ -32,7 +32,7 @@ export default async function CurrentAddress() {
     const cards = countriesInArea.map((country) => ({
       id: country.id,
       title: country.name,
-      href: `/currentaddress/world/${country.slug}`,
+      href: `/currentaddress/${country.slug}`,
       count: countryUserCounts && countryUserCounts[country.id] ? countryUserCounts[country.id] : '0',
     }));
 
