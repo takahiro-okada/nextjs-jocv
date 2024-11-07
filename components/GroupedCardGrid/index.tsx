@@ -10,6 +10,7 @@ type GroupedCardGridProps = {
       href: string;
       count: string;
       key: string;
+      flagSrc: string;
     };
   }[];
 };

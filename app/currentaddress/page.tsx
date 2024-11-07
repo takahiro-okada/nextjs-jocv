@@ -33,6 +33,7 @@ export default async function CurrentAddress() {
       id: country.id,
       title: country.name,
       href: `/currentaddress/${country.slug}`,
+      flagsrc: `/images/flags/${country.countryCode}.svg`,
       count: countryUserCounts && countryUserCounts[country.id] ? countryUserCounts[country.id] : '0',
     }));
 
@@ -41,7 +42,6 @@ export default async function CurrentAddress() {
       cards: cards,
     };
   });
-
   return (
     <>
       <Header />
