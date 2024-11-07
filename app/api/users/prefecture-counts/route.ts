@@ -14,7 +14,9 @@ export async function GET() {
 
     const counts = prefectureCounts.reduce(
       (acc, curr) => {
-        acc[curr.currentPrefectureId] = curr._count.id;
+        if (curr.currentPrefectureId !== null) {
+          acc[curr.currentPrefectureId] = curr._count.id;
+        }
         return acc;
       },
       {} as Record<string, number>,

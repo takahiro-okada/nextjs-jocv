@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 type CardProps = {
   title: string;
-  count: number;
+  count: string;
   href: string;
   subtitle?: string;
   flagsrc?: string;

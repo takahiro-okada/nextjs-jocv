@@ -2,7 +2,7 @@ import { UserType } from '@/app/type';
 
 const API_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
 
-async function fetchUsersByCohortsYear(year: number): Promise<UserType[]> {
+async function fetchUsersByCohortsYear(year: string): Promise<UserType[]> {
   const res = await fetch(`${API_URL}/api/users/cohorts/${year}`, {
     cache: 'no-cache',
   });

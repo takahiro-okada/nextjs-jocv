@@ -14,7 +14,9 @@ export async function GET() {
 
     const counts = countryCounts.reduce(
       (acc, curr) => {
-        acc[curr.deploymentCountryId] = curr._count.id;
+        if (curr.deploymentCountryId !== null) {
+          acc[curr.deploymentCountryId] = curr._count.id;
+        }
         return acc;
       },
       {} as Record<string, number>,

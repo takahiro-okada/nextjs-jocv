@@ -20,12 +20,6 @@ export async function GET() {
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      include: {
-        currentCountry: true,
-        currentPrefecture: true,
-        deploymentCountry: true,
-        cohort: true,
-      },
     });
 
     if (!user) {
@@ -47,33 +41,54 @@ export async function PUT(request: NextRequest) {
   }
 
   const userId = session.user.id;
-  const data = await request.json();
 
   try {
+    const formData = await request.formData();
+    console.log('Received form data:', Object.fromEntries(formData));
+
+    const updatedUserData: any = {
+      name: formData.get('name'),
+      bio: formData.get('bio'),
+      twitterUrl: formData.get('twitterUrl'),
+      instagramUrl: formData.get('instagramUrl'),
+      websiteUrl: formData.get('websiteUrl'),
+      currentCountryId: formData.get('currentCountryId'),
+      currentPrefectureId: formData.get('currentPrefectureId'),
+      deploymentCountryId: formData.get('deploymentCountryId'),
+      cohortYear: formData.get('cohortYear'),
+      cohortGroup: formData.get('cohortGroup'),
+    };
+
+    // Remove undefined values
+    Object.keys(updatedUserData).forEach((key) => updatedUserData[key] === undefined && delete updatedUserData[key]);
+
+    const imageFile = formData.get('image');
+    if (imageFile && typeof imageFile !== 'string') {
+      // Check if it's a File or Blob object
+      if (imageFile instanceof Blob) {
+        const buffer = await imageFile.arrayBuffer();
+        const base64Image = Buffer.from(buffer).toString('base64');
+        updatedUserData.image = `data:${imageFile.type};base64,${base64Image}`;
+      } else {
+        console.warn('Received image is neither a string nor a Blob:', typeof imageFile);
+      }
+    } else if (typeof imageFile === 'string') {
+      // If it's already a string (e.g., data URL), use it as is
+      updatedUserData.image = imageFile;
+    }
+
+    console.log('Updating user with data:', updatedUserData);
+
     const updatedUser = await prisma.user.update({
       where: { id: userId },
-      data: {
-        name: data.name,
-        bio: data.bio,
-        twitterUrl: data.twitterUrl,
-        instagramUrl: data.instagramUrl,
-        websiteUrl: data.websiteUrl,
-        currentCountryId: data.currentCountryId,
-        currentPrefectureId: data.currentPrefectureId,
-        deploymentCountryId: data.deploymentCountryId,
-        cohortId: data.cohortId,
-      },
-      include: {
-        currentCountry: true,
-        currentPrefecture: true,
-        deploymentCountry: true,
-        cohort: true,
-      },
+      data: updatedUserData,
     });
+
+    console.log('User updated successfully:', updatedUser);
 
     return NextResponse.json(updatedUser);
   } catch (error) {
     console.error('Failed to update user profile:', error);
-    return NextResponse.json({ error: 'Failed to update profile' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to update profile', details: (error as Error).message }, { status: 500 });
   }
 }
