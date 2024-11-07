@@ -19,6 +19,7 @@ export default async function DispatchedCountry() {
         id: country.id,
         title: country.name,
         href: `/deploymentcountry/${country.slug}`,
+        flagsrc: `/images/flags/${country.countryCode}.svg`,
         count: countryUserCounts && countryUserCounts[country.id] ? countryUserCounts[country.id] : '0',
       }));
 
