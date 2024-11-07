@@ -2,11 +2,11 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
-import fetchUsersByCohortsYear from '@/app/queries/fetchUserByCohortsYear';
+import fetchUsersByCohortsYearGroup from '@/app/queries/fethUserByCohortsYearGroup';
 
-export default async function CountryPage({ params }: { params: { year: string } }) {
-  const { year } = params;
-  const users: UserType[] = await fetchUsersByCohortsYear(year);
+export default async function CountryPage({ params }: { params: { year: number; group: string } }) {
+  const { year, group } = params;
+  const users: UserType[] = await fetchUsersByCohortsYearGroup(year, group);
 
   return (
     <>

@@ -44,7 +44,8 @@ model User {
   currentCountryId    String?
   currentPrefectureId String?
   deploymentCountryId String?
-  cohortId            String?
+  cohortYear          String?
+  cohortGroup         String?
   twitterUrl          String?
   instagramUrl        String?
   websiteUrl          String?
