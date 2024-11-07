@@ -1,28 +1,33 @@
-import fetchCohortUsers from '@/app/queries/fetchCohortUsers';
-import { UserType } from '@/app/type';
-import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
-import Image from 'next/image';
+import fetchUsersByCohortsYear from '@/app/queries/fetchUserByCohortsYear';
 
-export default async function Page({ params }: { params: { year: string } }) {
-  const data = await fetchCohortUsers(parseInt(params.year));
-  const users = data.users;
+export default async function CountryPage({ params }: { params: { year: string } }) {
+  const { year } = params;
+  const users: UserType[] = await fetchUsersByCohortsYear(year);
 
   return (
     <>
       <Header />
-      <div className="px-4">
-        <div className="mt-6 flex items-center text-2xl">
-          <Image src="/images/icon-member.svg" alt="" width={40} height={40} />
-          <h2 className="text-xl">{params.year}年に参加したJOCV</h2>
+      <main className="container mx-auto px-4 py-8">
+        {/* <SectionTitle title={`${prefectureData?.name}在住者一覧`} /> */}
+        <div className="mt-8">
+          {users && users.length > 0 ? (
+            <>
+              <h3 className="mb-6 text-2xl font-bold">在住者 ({users.length}名)</h3>
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {users.map((user: UserType) => (
+                  <ProfileCard key={user.id} user={user} />
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="py-8 text-center text-xl">まだ、ユーザーはいません。</p>
+          )}
         </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {users.map((user: UserType) => (
-            <ProfileCard key={user.id} user={user} />
-          ))}
-        </div>
-      </div>
+      </main>
       <Footer />
     </>
   );

@@ -31,7 +31,7 @@ export function useProfile() {
     loadUserProfile();
   }, [status]);
 
-  const updateProfile = async (updatedProfile: Partial<UserType>) => {
+  const updateProfile = async (updatedProfile: FormData) => {
     try {
       const result = await updateProfileAPI(updatedProfile);
       setProfile(result);

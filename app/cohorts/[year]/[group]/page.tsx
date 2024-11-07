@@ -1,21 +1,18 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SectionTitle from '@/components/SectionTitle';
-import { PREFECTURES } from '@/constants/prefectures';
-import fetchUsersByCurrentPrefecture from '@/app/queries/fetchUsersByCurrentPrefecture';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
+import fetchUsersByCohortsYearGroup from '@/app/queries/fethUserByCohortsYearGroup';
 
-export default async function PrefecturePage({ params }: { params: { prefecture: string } }) {
-  const { prefecture } = params;
-  const prefectureData = PREFECTURES.find((p) => p.slug === prefecture);
-  const users: UserType[] = await fetchUsersByCurrentPrefecture(prefecture);
+export default async function CountryPage({ params }: { params: { year: number; group: string } }) {
+  const { year, group } = params;
+  const users: UserType[] = await fetchUsersByCohortsYearGroup(year, group);
 
   return (
     <>
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <SectionTitle title={`${prefectureData?.name}在住者一覧`} />
+        {/* <SectionTitle title={`${prefectureData?.name}在住者一覧`} /> */}
         <div className="mt-8">
           {users && users.length > 0 ? (
             <>
@@ -27,7 +24,7 @@ export default async function PrefecturePage({ params }: { params: { prefecture:
               </ul>
             </>
           ) : (
-            <p className="py-8 text-center text-xl">まだ、この都道府県に登録しているユーザーはいません。</p>
+            <p className="py-8 text-center text-xl">まだ、ユーザーはいません。</p>
           )}
         </div>
       </main>

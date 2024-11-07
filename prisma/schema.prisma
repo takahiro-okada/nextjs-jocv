@@ -44,15 +44,12 @@ model User {
   currentCountryId    String?
   currentPrefectureId String?
   deploymentCountryId String?
-  cohortId            String?
+  cohortYear          String?
+  cohortGroup         String?
   twitterUrl          String?
   instagramUrl        String?
   websiteUrl          String?
   bio                 String?
-  currentCountry      Country?    @relation("CurrentCountry", fields: [currentCountryId], references: [id])
-  currentPrefecture   Prefecture? @relation(fields: [currentPrefectureId], references: [id])
-  deploymentCountry   Country?    @relation("DeploymentCountry", fields: [deploymentCountryId], references: [id])
-  cohort              Cohort?     @relation(fields: [cohortId], references: [id])
   favoritedBy         Favorite[]  @relation("FavoritedUsers")
   favorites           Favorite[]  @relation("UserFavorites")
   accounts            Account[]
@@ -67,35 +64,6 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verification_tokens")
 }
-
-model Country {
-  id            String       @id @default(uuid())
-  name          String       @unique
-  slug          String       @unique
-  isDeveloping  Boolean      @default(false)
-  continent     String?
-  currentUsers  User[]       @relation("CurrentCountry")
-  deployedUsers User[]       @relation("DeploymentCountry")
-  prefectures   Prefecture[]
-}
-
-model Prefecture {
-  id        String  @id @default(uuid())
-  name      String
-  slug      String  @unique
-  countryId String
-  country   Country @relation(fields: [countryId], references: [id])
-  users     User[]
-}
-
-model Cohort {
-  id         String @id @default(uuid())
-  name       String
-  cohortYear String
-  cohortTerm String
-  users      User[]
-}
-
 model Favorite {
   id             String @id @default(uuid())
   userId         String

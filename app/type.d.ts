@@ -32,7 +32,8 @@ export interface UserType {
   currentCountryId?: string;
   currentPrefectureId?: string;
   deploymentCountryId?: string;
-  cohortId?: string;
+  cohortYear?: number;
+  cohotGroup?: string;
   twitterUrl?: string;
   instagramUrl?: string;
   websiteUrl?: string;
@@ -48,12 +49,11 @@ export interface UserType {
 }
 
 export interface PrefectureType {
-  id: string;
+  id: number;
   name: string;
-  country: {
-    id: string;
-    name: string;
-  };
+  slug: string;
+  countryId: string;
+  areaId: string;
 }
 
 export interface DeploymentLocation {
@@ -72,9 +72,8 @@ export interface CountryType {
   slug: string;
   isDeveloping: boolean;
   continent: string;
-  currentUsers: UserType[];
-  deployedUsers: UserType[];
-  prefectures: PrefectureType[];
+  countryCode: string;
+  prefectures?: PrefectureType[];
 }
 
 export interface CohortType {

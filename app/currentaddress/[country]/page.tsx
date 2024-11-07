@@ -1,15 +1,15 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SectionTitle from '@/components/SectionTitle';
-import { PREFECTURES } from '@/constants/prefectures';
-import fetchUsersByCurrentPrefecture from '@/app/queries/fetchUsersByCurrentPrefecture';
+import { COUNTRIES } from '@/constants/countries';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
+import fetchUsersByCurrentCountry from '@/app/queries/fetchUsersByCurrentCountry';
 
-export default async function PrefecturePage({ params }: { params: { prefecture: string } }) {
-  const { prefecture } = params;
-  const prefectureData = PREFECTURES.find((p) => p.slug === prefecture);
-  const users: UserType[] = await fetchUsersByCurrentPrefecture(prefecture);
+export default async function CountryPage({ params }: { params: { country: string } }) {
+  const { country } = params;
+  const prefectureData = COUNTRIES.find((p) => p.slug === country);
+  const users: UserType[] = await fetchUsersByCurrentCountry(country);
 
   return (
     <>
@@ -27,7 +27,7 @@ export default async function PrefecturePage({ params }: { params: { prefecture:
               </ul>
             </>
           ) : (
-            <p className="py-8 text-center text-xl">まだ、この都道府県に登録しているユーザーはいません。</p>
+            <p className="py-8 text-center text-xl">まだ、ユーザーはいません。</p>
           )}
         </div>
       </main>

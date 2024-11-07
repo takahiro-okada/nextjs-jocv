@@ -36,7 +36,7 @@ export default function HamburgerButton() {
             </Link>
           </li>
           <li>
-            <Link className="inline-block p-2" href="/deploymentlocations/">
+            <Link className="inline-block p-2" href="/deploymentcountry/">
               任地から調べる
             </Link>
           </li>

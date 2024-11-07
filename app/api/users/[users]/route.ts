@@ -12,36 +12,6 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
       where: {
         id: userId,
       },
-      include: {
-        currentCountry: {
-          select: {
-            name: true,
-            slug: true,
-            isDeveloping: true,
-            continent: true,
-          },
-        },
-        currentPrefecture: {
-          select: {
-            name: true,
-            slug: true,
-          },
-        },
-        deploymentCountry: {
-          select: {
-            name: true,
-            slug: true,
-            isDeveloping: true,
-            continent: true,
-          },
-        },
-        cohort: {
-          select: {
-            cohortYear: true,
-            cohortTerm: true,
-          },
-        },
-      },
     });
 
     if (!user) {
