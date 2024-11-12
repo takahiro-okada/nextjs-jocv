@@ -9,6 +9,7 @@ import fetchUsersByDeploymentCountry from '@/app/queries/fetchUsersByCurrenDeplo
 export default async function RegionPage({ params }: { params: { slug: string } }) {
   const countrySlug = params.slug;
   const users: UserType[] = await fetchUsersByDeploymentCountry(countrySlug);
+  console.log(users);
 
   return (
     <>

@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchUsersByCohortsYearGroup from '@/app/queries/fethUserByCohortsYearGroup';
+import SectionTitle from '@/components/SectionTitle';
 
 export default async function CountryPage({ params }: { params: { year: number; group: string } }) {
   const { year, group } = params;
@@ -12,7 +13,7 @@ export default async function CountryPage({ params }: { params: { year: number; 
     <>
       <Header />
       <main className="container mx-auto px-4 py-8">
-        {/* <SectionTitle title={`${prefectureData?.name}在住者一覧`} /> */}
+        <SectionTitle title={`${year}年${group}次隊として派遣されたOBOG`} />
         <div className="mt-8">
           {users && users.length > 0 ? (
             <>

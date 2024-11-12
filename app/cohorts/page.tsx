@@ -3,8 +3,11 @@ import Footer from '@/components/Footer';
 import SectionTitle from '@/components/SectionTitle';
 import { COHORTS } from '@/constants/cohorts';
 import Link from 'next/link';
+import fetchCohortsUserCounts from '../queries/fetchCohortsUserCounts';
 
 export default async function Page() {
+  const cohortsUserCounts = await fetchCohortsUserCounts();
+
   return (
     <>
       <Header />
@@ -20,7 +23,9 @@ export default async function Page() {
                 <Link href={`/cohorts/${cohort.id}`} passHref className="mb-2 block">
                   <h3 className="text-xl font-semibold transition-colors duration-200">{cohort.japaneseEra}派遣隊次</h3>
                 </Link>
-                <p className="mb-2 text-gray-600">人数: {/* API-fetched count will go here */}</p>
+                <p className="mb-2 text-gray-600">
+                  人数: {cohortsUserCounts && cohortsUserCounts[cohort.id] ? cohortsUserCounts[cohort.id] : 0}人
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {cohort.groups.map((group) => (
                     <Link
