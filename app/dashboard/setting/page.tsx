@@ -52,7 +52,7 @@ export default function Settings() {
     setProfile((prevProfile) => {
       const updatedProfile = { ...prevProfile!, [name]: value };
       if (name === 'cohortYear') {
-        updatedProfile.cohotGroup = ''; // Reset cohotGroup when cohortYear changes
+        updatedProfile.cohortGroup = ''; // Reset cohortGroup when cohortYear changes
       }
       return updatedProfile;
     });

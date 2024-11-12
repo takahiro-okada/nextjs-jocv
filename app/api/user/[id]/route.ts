@@ -5,7 +5,7 @@ import { enhanceUserData, EnhancedUser } from '@/utils/userDataEnhancer';
 
 const prisma = new PrismaClient();
 
-export const GET = async ({ params }: { params: Params }) => {
+export const GET = async (request: Request, { params }: { params: Params }) => {
   try {
     const userId = params.id;
     console.log('userId', userId);
