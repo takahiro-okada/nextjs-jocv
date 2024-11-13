@@ -49,10 +49,13 @@ export default function Settings() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setProfile((prevProfile) => ({
-      ...prevProfile!,
-      [name]: value,
-    }));
+    setProfile((prevProfile) => {
+      const updatedProfile = { ...prevProfile!, [name]: value };
+      if (name === 'cohortYear') {
+        updatedProfile.cohortGroup = ''; // Reset cohortGroup when cohortYear changes
+      }
+      return updatedProfile;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -280,7 +283,7 @@ export default function Settings() {
               <select
                 id="cohortGroup"
                 name="cohortGroup"
-                value={profile.cohotGroup || ''}
+                value={profile.cohortGroup || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required

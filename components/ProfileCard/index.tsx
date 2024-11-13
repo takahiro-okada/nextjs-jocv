@@ -3,7 +3,7 @@ import { UserType } from '@/app/type';
 import Image from 'next/image';
 
 export default function ProfileCard({ user }: { user: UserType }) {
-  const { id, name, image, currentCountry, deploymentCountry, bio } = user;
+  const { id, name, image, currentCountry, deploymentCountry, currentPrefecture, bio } = user;
 
   return (
     <Link href={`/${id}`} className="block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg">
@@ -21,7 +21,9 @@ export default function ProfileCard({ user }: { user: UserType }) {
             {currentCountry?.name && (
               <p className="text-sm text-gray-600">
                 現住所：
-                <span className="font-medium ">{currentCountry.name}</span>
+                <span className="font-medium ">
+                  {currentCountry.name} {currentPrefecture?.name}
+                </span>
               </p>
             )}
             {deploymentCountry?.name && (

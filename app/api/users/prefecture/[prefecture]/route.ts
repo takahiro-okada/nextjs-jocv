@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { enhanceUserData } from '@/utils/userDataEnhancer';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,9 @@ export async function GET(request: Request, { params }: { params: { prefecture: 
       return NextResponse.json(undefined);
     }
 
-    return NextResponse.json(users);
+    const enhancedUsers = users.map(enhanceUserData);
+
+    return NextResponse.json(enhancedUsers);
   } catch (error) {
     console.error('Request error', error);
     return NextResponse.json({ error: 'Error fetching data' }, { status: 500 });

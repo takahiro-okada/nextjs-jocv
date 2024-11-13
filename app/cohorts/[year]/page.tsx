@@ -3,16 +3,18 @@ import Footer from '@/components/Footer';
 import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchUsersByCohortsYear from '@/app/queries/fetchUserByCohortsYear';
+import SectionTitle from '@/components/SectionTitle';
 
 export default async function CountryPage({ params }: { params: { year: string } }) {
   const { year } = params;
   const users: UserType[] = await fetchUsersByCohortsYear(year);
+  console.log(users);
 
   return (
     <>
       <Header />
       <main className="container mx-auto px-4 py-8">
-        {/* <SectionTitle title={`${prefectureData?.name}在住者一覧`} /> */}
+        <SectionTitle title={`${year}年に派遣されたOBOG`} />
         <div className="mt-8">
           {users && users.length > 0 ? (
             <>

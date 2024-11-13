@@ -33,7 +33,7 @@ export interface UserType {
   currentPrefectureId?: string;
   deploymentCountryId?: string;
   cohortYear?: number;
-  cohotGroup?: string;
+  cohortGroup?: string;
   twitterUrl?: string;
   instagramUrl?: string;
   websiteUrl?: string;
@@ -66,16 +66,15 @@ export interface DeploymentLocation {
   count: number;
 }
 
-export interface CountryType {
+export type CountryType = {
   id: string;
   name: string;
   slug: string;
   isDeveloping: boolean;
+  countryCode?: string;
   continent: string;
-  countryCode: string;
-  prefectures?: PrefectureType[];
-}
-
+  country?: string;
+};
 export interface CohortType {
   id: string;
   name: string;
