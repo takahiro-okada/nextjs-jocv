@@ -6,11 +6,11 @@ type CardProps = {
   count: string;
   href: string;
   subtitle?: string;
-  flagsrc?: string;
+  flagSrc?: string;
   className?: string;
 };
 
-export default function Card({ title, count, href, subtitle, flagsrc, className = '' }: CardProps) {
+export default function Card({ title, count, href, subtitle, flagSrc, className = '' }: CardProps) {
   return (
     <li className={`overflow-hidden rounded-lg border ${className}`}>
       <Link href={href} className="block border-[#f1f6f9] bg-white p-4 transition-colors hover:bg-blue-50">
@@ -22,7 +22,7 @@ export default function Card({ title, count, href, subtitle, flagsrc, className 
               {count}人
             </span>
           </div>
-          {flagsrc && <Image src={flagsrc} alt={`${title}の国旗`} width={40} height={40} className="rounded-sm" />}
+          {flagSrc && <Image src={flagSrc} alt={`${title}の国旗`} width={40} height={40} className="rounded-sm" />}
         </div>
       </Link>
     </li>

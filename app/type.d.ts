@@ -68,11 +68,8 @@ export interface DeploymentLocation {
 
 export type CountryType = {
   id: string;
-
   name: string;
-
   slug: string;
-
   isDeveloping: boolean;
   countryCode?: string;
   continent: string;

@@ -31,15 +31,16 @@ export default async function CurrentAddress() {
   });
 
   const groupedCountries = countryUserCounts ? getGroupedCountries(countryUserCounts) : [];
+  console.log(groupedCountries[0].cards[0]);
 
   return (
     <>
       <Header />
       <main className="container mx-auto px-4 py-8">
         <SectionTitle title="現住所" />
-        <h2 className="mb-8 text-2xl font-bold">日本</h2>
+        <h2 className="mb-8 mt-6 text-2xl font-bold">日本</h2>
         <GroupedCardGrid groups={groupedPrefectures} />
-        <h2 className="mb-8 text-2xl font-bold">海外</h2>
+        <h2 className="mb-8 mt-6 text-2xl font-bold">海外</h2>
         <GroupedCardGrid groups={groupedCountries} />
       </main>
       <Footer />
