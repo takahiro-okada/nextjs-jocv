@@ -6,7 +6,8 @@ import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchUsersByDeploymentCountry from '@/app/queries/fetchUsersByCurrenDeploymentCountry';
 
-export default async function RegionPage({ params }: { params: { slug: string } }) {
+export default async function RegionPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const countrySlug = params.slug;
   const users: UserType[] = await fetchUsersByDeploymentCountry(countrySlug);
   console.log(users);

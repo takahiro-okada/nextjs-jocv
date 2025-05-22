@@ -6,7 +6,8 @@ import { UserType } from '@/app/type';
 import ProfileCard from '@/components/ProfileCard';
 import fetchUsersByCurrentCountry from '@/app/queries/fetchUsersByCurrentCountry';
 
-export default async function CountryPage({ params }: { params: { country: string } }) {
+export default async function CountryPage(props: { params: Promise<{ country: string }> }) {
+  const params = await props.params;
   const { country } = params;
   const prefectureData = COUNTRIES.find((p) => p.slug === country);
   const users: UserType[] = await fetchUsersByCurrentCountry(country);

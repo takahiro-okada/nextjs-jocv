@@ -6,7 +6,8 @@ import { notFound } from 'next/navigation';
 import fetchUser from '@/app/queries/fetchUser';
 import { Instagram, Globe, X } from 'lucide-react';
 
-export default async function Profile({ params }: { params: { profile: number } }) {
+export default async function Profile(props: { params: Promise<{ profile: number }> }) {
+  const params = await props.params;
   const userId = params.profile;
   const user = await fetchUser(userId);
 

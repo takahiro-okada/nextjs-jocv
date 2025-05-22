@@ -5,7 +5,8 @@ import ProfileCard from '@/components/ProfileCard';
 import fetchUsersByCohortsYearGroup from '@/app/queries/fethUserByCohortsYearGroup';
 import SectionTitle from '@/components/SectionTitle';
 
-export default async function CountryPage({ params }: { params: { year: number; group: string } }) {
+export default async function CountryPage(props: { params: Promise<{ year: number; group: string }> }) {
+  const params = await props.params;
   const { year, group } = params;
   const users: UserType[] = await fetchUsersByCohortsYearGroup(year, group);
 

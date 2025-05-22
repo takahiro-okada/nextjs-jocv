@@ -4,7 +4,8 @@ import { enhanceUserData } from '@/utils/userDataEnhancer';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request, { params }: { params: { prefecture: string } }) {
+export async function GET(request: Request, props: { params: Promise<{ prefecture: string }> }) {
+  const params = await props.params;
   const { prefecture } = params;
 
   try {

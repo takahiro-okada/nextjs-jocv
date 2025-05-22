@@ -1,14 +1,19 @@
 import { PrismaClient } from '@prisma/client';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { NextResponse } from 'next/server';
 import { enhanceUserData, EnhancedUser } from '@/utils/userDataEnhancer';
+import { Params } from 'next/dist/server/request/params';
 
 const prisma = new PrismaClient();
 
-export const GET = async (request: Request, { params }: { params: Params }) => {
+export const GET = async (request: Request, props: { params: Promise<Params> }) => {
+  const params = await props.params;
   try {
-    const userId = params.id;
-    console.log('userId', userId);
+    let userId: string | undefined;
+    if (Array.isArray(params.id)) {
+      userId = params.id[0];
+    } else {
+      userId = params.id;
+    }
 
     const user = await prisma.user.findUnique({
       where: {

@@ -42,7 +42,7 @@ export default function Me() {
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+          className="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow"
         />
       </div>
       <div className="mb-6">
@@ -74,7 +74,7 @@ export default function Me() {
       </div>
       <button
         type="submit"
-        className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+        className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
       >
         投稿
       </button>
