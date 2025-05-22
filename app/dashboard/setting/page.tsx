@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import { toast } from 'react-toastify';
 import { useProfile } from '@/hooks/useProfile';
 import { UserType } from '@/app/type';
-import { toast } from 'react-toastify';
 import { PREFECTURES, AREAS } from '@/constants/prefectures';
 import { COUNTRIES } from '@/constants/countries';
 import { COHORTS } from '@/constants/cohorts';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 export default function Settings() {
   const { profile: initialProfile, isLoading, error, updateProfile } = useProfile();
@@ -52,7 +52,7 @@ export default function Settings() {
     setProfile((prevProfile) => {
       const updatedProfile = { ...prevProfile!, [name]: value };
       if (name === 'cohortYear') {
-        updatedProfile.cohortGroup = ''; // Reset cohortGroup when cohortYear changes
+        updatedProfile.cohortGroup = '';
       }
       return updatedProfile;
     });
@@ -104,7 +104,12 @@ export default function Settings() {
     }));
   }, []);
 
-  if (isLoading) return <div className="flex h-screen items-center justify-center">読み込み中...</div>;
+  if (isLoading)
+    return (
+      <div className="flex h-screen items-center justify-center" aria-label="読み込み中">
+        <div className="size-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+      </div>
+    );
   if (error) return <div className="flex h-screen items-center justify-center text-red-500">エラー: {error}</div>;
   if (!profile) return <div className="flex h-screen items-center justify-center">プロフィールデータがありません</div>;
 
@@ -125,11 +130,11 @@ export default function Settings() {
                   alt="プロフィール画像"
                   width={100}
                   height={100}
-                  className="rounded-full"
+                  className="aspect-square rounded-full object-cover"
                 />
                 <label
                   htmlFor="select-avatar"
-                  className="cursor-pointer rounded-md bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600"
+                  className="inline-block min-w-32 rounded-3xl border border-gray-300 px-4 py-2"
                 >
                   画像を変更
                   <input
@@ -302,13 +307,14 @@ export default function Settings() {
                 Twitter
               </label>
               <input
-                type="url"
+                type="text"
                 id="twitterUrl"
                 name="twitterUrl"
                 value={profile.twitterUrl || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <span className="text-sm text-gray-500">アカウント名のみを入力してください</span>
             </div>
 
             <div>
@@ -316,13 +322,14 @@ export default function Settings() {
                 Instagram
               </label>
               <input
-                type="url"
+                type="text"
                 id="instagramUrl"
                 name="instagramUrl"
                 value={profile.instagramUrl || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <span className="text-sm text-gray-500">アカウント名のみを入力してください</span>
             </div>
 
             <div>
@@ -337,13 +344,13 @@ export default function Settings() {
                 onChange={handleInputChange}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <span className="text-sm text-gray-500">
+                個人で運営しているサイトやオンラインショップなど紹介したいものがあればこちらにURLを貼ってください
+              </span>
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="w-full rounded-md bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600"
-              >
+              <button type="submit" className="inline-block min-w-32 rounded-3xl border border-gray-300 px-4 py-2">
                 更新する
               </button>
             </div>

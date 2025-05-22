@@ -12,9 +12,9 @@ export default function ProfileCard({ user }: { user: UserType }) {
           <Image
             width={64}
             height={64}
-            src={image || '/images/default-avatar.jpg'}
+            src={image || '/images/default-avatar.png'}
             alt={name || ''}
-            className="rounded-full object-cover"
+            className="rounded-full border-2 border-[#f1f6f9] object-cover "
           />
           <div className="ml-4">
             <h2 className="text-xl font-bold">{name}</h2>

@@ -20,9 +20,9 @@ export default async function Profile({ params }: { params: { profile: number } 
       <main className="container mx-auto max-w-3xl px-4 py-12">
         <div className="flex flex-col items-center">
           <Image
-            src={user.image || '/default-profile.png'}
+            src={user.image || '/images/default-avatar.png'}
             alt="user profile"
-            className="size-40 rounded-full object-cover shadow-lg"
+            className="size-40 rounded-full border-2 border-[#f1f6f9] object-cover p-5"
             width={600}
             height={600}
           />

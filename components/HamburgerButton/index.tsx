@@ -1,8 +1,11 @@
 'use client';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import Button from '../Button';
 
 export default function HamburgerButton() {
+  const { status } = useSession();
   const [openMenu, setOpenMenu] = useState(false);
   const handleMenuOpen = () => {
     setOpenMenu(!openMenu);
@@ -45,11 +48,19 @@ export default function HamburgerButton() {
               現住所から調べる
             </Link>
           </li>
-          <li>
-            <Link className="inline-block p-2" href="/dashboard/setting/">
-              設定
-            </Link>
-          </li>
+          {(status === 'authenticated' && (
+            <li>
+              <Link className="inline-block p-2" href="/dashboard/setting/">
+                設定
+              </Link>
+            </li>
+          )) || (
+            <li>
+              <div className="mt-8 text-center">
+                <Button onClick={() => signIn('google', {}, { prompt: 'login' })}>ログイン</Button>
+              </div>
+            </li>
+          )}
         </ul>
       </nav>
       {/* backgroud */}
