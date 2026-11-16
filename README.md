@@ -76,3 +76,14 @@ utils/              # Utility functions
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Run Prettier
+
+
+## Cloudflare deployment
+
+The app runs on Cloudflare Workers through OpenNext. The tracked `wrangler.jsonc` defines its Worker, assets and any custom domains. Install dependencies with `pnpm install --frozen-lockfile`, then run `pnpm run build:cloudflare` and `pnpm run deploy:cloudflare`. GitHub pushes to `main` use the same commands through Cloudflare Builds.
+
+Configure environment values separately in Cloudflare Builds (build time) and Worker Secrets (runtime). Local `.env.production.local` and `.dev.vars` files are ignored. Use `wrangler secret bulk` with JSON on stdin to update runtime secrets. The configuration preserves existing runtime variables on deploy.
+
+Prisma uses its JavaScript engine and PostgreSQL driver adapter. Clients are created per request and disconnected afterward so Workers do not reuse sockets across requests. No database schema migration is required.
+
+Use the new public URL for `NEXTAUTH_URL`, `NEXT_PUBLIC_VERCEL_URL` and `NEXT_PUBLIC_API_URL`. Add `<new URL>/api/auth/callback/google` to the existing Google OAuth client redirect URIs. The original database project is currently unavailable to the connected Supabase organization; database recovery has been deferred.

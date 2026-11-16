@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { createPrismaClient } from '@/app/libs/prisma';
 
-const prisma = new PrismaClient();
 
 export async function GET() {
+  const prisma = createPrismaClient();
   try {
     const countryCounts = await prisma.user.groupBy({
       by: ['deploymentCountryId'],

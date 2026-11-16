@@ -1,11 +1,10 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import GoogleProvider from 'next-auth/providers/google';
 import { Session, NextAuthOptions, DefaultSession } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import type { Adapter } from 'next-auth/adapters';
 
-const prisma = new PrismaClient();
 
 declare module 'next-auth' {
   // eslint-disable-next-line no-unused-vars
@@ -18,7 +17,6 @@ declare module 'next-auth' {
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET ?? '',
-  adapter: PrismaAdapter(prisma) as Adapter,
   session: { strategy: 'jwt' },
   callbacks: {
     session: async ({ session, token }: { session: Session; token: JWT }) => {
@@ -49,3 +47,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 };
+
+export function createAuthOptions(prisma: PrismaClient): NextAuthOptions {
+  return { ...authOptions, adapter: PrismaAdapter(prisma) as Adapter };
+}

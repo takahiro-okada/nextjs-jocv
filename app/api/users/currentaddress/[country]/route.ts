@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { createPrismaClient } from '@/app/libs/prisma';
 import getCountryIdBySlug from '@/utils/getCountryIdBySlug';
 import { enhanceUserData } from '@/utils/userDataEnhancer';
 
-const prisma = new PrismaClient();
 
 export async function GET(request: Request, props: { params: Promise<{ country: string }> }) {
+  const prisma = createPrismaClient();
   const params = await props.params;
   const { country } = params;
   const countryId = getCountryIdBySlug(country);

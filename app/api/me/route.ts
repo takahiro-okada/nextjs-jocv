@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/libs/auth';
-import { PrismaClient } from '@prisma/client';
+import { createPrismaClient } from '@/app/libs/prisma';
 
-const prisma = new PrismaClient();
 
 export async function GET() {
+  const prisma = createPrismaClient();
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -30,10 +30,13 @@ export async function GET() {
   } catch (error) {
     console.error('Failed to fetch user data:', error);
     return NextResponse.json({ error: 'Failed to fetch user data' }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
 export async function PUT(request: NextRequest) {
+  const prisma = createPrismaClient();
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
@@ -90,5 +93,7 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     console.error('Failed to update user profile:', error);
     return NextResponse.json({ error: 'Failed to update profile', details: (error as Error).message }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }
