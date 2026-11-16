@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import { createPrismaClient } from '@/app/libs/prisma';
 import { NextResponse } from 'next/server';
 import { enhanceUserData, EnhancedUser } from '@/utils/userDataEnhancer';
 import { Params } from 'next/dist/server/request/params';
 
-const prisma = new PrismaClient();
 
 export const GET = async (request: Request, props: { params: Promise<Params> }) => {
+  const prisma = createPrismaClient();
   const params = await props.params;
   try {
     let userId: string | undefined;
